@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>BullshitBench Stability Audit</title>
+
+  <style>
+    :root {
+      --bg: #090208; 
+      --card: #140512;
+      --card2: #1b0718;
+      --text: #ffe8f6;
+      --muted: #d99bc4;
+      --line: rgba(255, 0, 128, 0.3);
+      --good: #ff007f;
+      --warn: #eaff00;
+      --bad: #ff003c;
+      --neutral: #00f0ff;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    body {
+      margin: 0;
+      background: radial-gradient(1200px 600px at 20% 0%, rgba(255, 0, 127, 0.25), transparent 55%),
+                  radial-gradient(900px 500px at 80% 10%, rgba(0, 240, 255, 0.15), transparent 55%);
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.5;
+    }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 28px 18px 60px; }
+    h1 { margin: 0 0 6px; font-size: 28px; }
+    .subtitle { color: var(--muted); max-width: 85ch; }
+    .card {
+      margin-top: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      padding: 16px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--neutral);
+      margin-right: 8px;
+      box-shadow: 0 0 8px currentColor;
+      text-shadow: 0 0 2px currentColor;
+      font-size: 12px;
+    }
+    a { color: var(--neutral); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+    th, td { border-bottom: 1px solid rgba(255,255,255,0.10); padding: 8px; text-align: left; }
+    th { color: var(--muted); font-weight: 600; }
+    .mono { font-family: var(--mono); }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>BullshitBench Stability Audit</h1>
+    <div class="subtitle">
+      Derived stability + calibration metrics on BullshitBench-style prompts. No dashboard screenshots, no raw per-sample logs.
+    </div>
+
+    <div class="card">
+      <span class="badge">N=8</span>
+      <span class="badge">T=0.2</span>
+      <span class="badge">Det token overlap</span>
+      <span class="badge">NLI semantic baseline</span>
+    </div>
+
+    <div class="card">
+      <h2 style="margin:0 0 8px;">Results</h2>
+      <div class="subtitle">
+        Open the derived metrics here:
+        <a href="./results/summary.md">results/summary.md</a>
+        (or <a href="./results/summary.csv">summary.csv</a>)
+      </div>
+
+      <p class="subtitle" style="margin-top:10px;">
+        This page is a simple landing page for sharing. The tables live in the results folder.
+      </p>
+    </div>
+  </div>
+</body>
+</html>
