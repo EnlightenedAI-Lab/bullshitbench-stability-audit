@@ -7,55 +7,180 @@
 
   <style>
     :root {
+      /* Deep contrast background */
       --bg: #090208; 
-      --card: #140512;
-      --card2: #1b0718;
+      --card: rgba(20, 5, 18, 0.72);
+      --card2: rgba(27, 7, 24, 0.72);
+
+      /* Crisp text with neon accents */
       --text: #ffe8f6;
       --muted: #d99bc4;
-      --line: rgba(255, 0, 128, 0.3);
-      --good: #ff007f;
-      --warn: #eaff00;
-      --bad: #ff003c;
-      --neutral: #00f0ff;
+      --line: rgba(255, 0, 128, 0.35);
+
+      /* Fluorescent status colors */
+      --good: #00ffa8;   /* neon mint */
+      --warn: #eaff00;   /* acid yellow */
+      --bad:  #ff003c;   /* neon red/pink */
+      --neutral: #00f0ff;/* electric cyan */
+      --pink: #ff007f;   /* hot pink */
+
+      /* Typography */
       --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
     }
-    body {
-      margin: 0;
-      background: radial-gradient(1200px 600px at 20% 0%, rgba(255, 0, 127, 0.25), transparent 55%),
-                  radial-gradient(900px 500px at 80% 10%, rgba(0, 240, 255, 0.15), transparent 55%);
-      background-color: var(--bg);
+
+    body{
+      margin:0;
+      background:
+        radial-gradient(1200px 700px at 18% 0%, rgba(255, 0, 127, 0.28), transparent 58%),
+        radial-gradient(900px 600px at 85% 5%, rgba(0, 240, 255, 0.18), transparent 62%),
+        radial-gradient(900px 600px at 55% 95%, rgba(234, 255, 0, 0.10), transparent 55%),
+        var(--bg);
       color: var(--text);
       font-family: var(--sans);
       line-height: 1.5;
     }
-    .wrap { max-width: 1100px; margin: 0 auto; padding: 28px 18px 60px; }
-    h1 { margin: 0 0 6px; font-size: 28px; }
-    .subtitle { color: var(--muted); max-width: 85ch; }
-    .card {
+
+    .wrap{ max-width: 1100px; margin: 0 auto; padding: 32px 18px 70px; }
+    h1{ margin:0 0 8px; font-size: 30px; letter-spacing: 0.3px; }
+    .subtitle{ color: var(--muted); max-width: 90ch; }
+
+    .card{
       margin-top: 18px;
       border: 1px solid var(--line);
       border-radius: 18px;
-      background: rgba(255,255,255,0.03);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
       padding: 16px;
+      box-shadow:
+        0 0 0 1px rgba(255, 0, 127, 0.08) inset,
+        0 14px 40px rgba(0,0,0,0.45);
+      backdrop-filter: blur(10px);
     }
-    .badge {
-      display: inline-block;
+
+    .badges{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 10px; }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,0,127,0.55);
+      background: rgba(255, 0, 127, 0.08);
+      color: var(--text);
+      font-size: 12px;
+      box-shadow: 0 0 10px rgba(255, 0, 127, 0.45);
+      text-shadow: 0 0 4px rgba(255, 0, 127, 0.60);
+      white-space: nowrap;
+    }
+    .badge.cyan{
+      border-color: rgba(0, 240, 255, 0.55);
+      background: rgba(0, 240, 255, 0.08);
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.35);
+      text-shadow: 0 0 4px rgba(0, 240, 255, 0.55);
+    }
+    .badge.yellow{
+      border-color: rgba(234, 255, 0, 0.55);
+      background: rgba(234, 255, 0, 0.07);
+      box-shadow: 0 0 10px rgba(234, 255, 0, 0.22);
+      text-shadow: 0 0 4px rgba(234, 255, 0, 0.45);
+    }
+
+    a{ color: var(--neutral); text-decoration:none; }
+    a:hover{ text-decoration: underline; }
+
+    .controls{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+      align-items: center;
+    }
+    .controls label{
+      color: var(--muted);
+      font-size: 13px;
+    }
+    select, input{
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(0,0,0,0.20);
+      color: var(--text);
+      outline: none;
+    }
+    select:focus, input:focus{
+      border-color: rgba(0, 240, 255, 0.55);
+      box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.15);
+    }
+
+    .tableWrap{
+      margin-top: 12px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 16px;
+      overflow: auto;
+      background: rgba(0,0,0,0.18);
+    }
+
+    table{
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      min-width: 900px;
+    }
+    thead th{
+      position: sticky;
+      top: 0;
+      background: rgba(15, 4, 14, 0.95);
+      color: var(--muted);
+      font-weight: 700;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      padding: 10px 10px;
+      text-align: left;
+      letter-spacing: 0.2px;
+    }
+    tbody td{
+      padding: 10px 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      vertical-align: top;
+    }
+    tbody tr:hover{
+      background: rgba(255, 0, 127, 0.06);
+    }
+
+    .mono{ font-family: var(--mono); }
+    .num{ text-align: right; font-variant-numeric: tabular-nums; }
+    .pill{
+      display:inline-flex;
+      align-items:center;
       padding: 4px 10px;
       border-radius: 999px;
-      border: 1px solid var(--line);
-      color: var(--neutral);
-      margin-right: 8px;
-      box-shadow: 0 0 8px currentColor;
-      text-shadow: 0 0 2px currentColor;
       font-size: 12px;
+      border: 1px solid rgba(255,255,255,0.14);
     }
-    a { color: var(--neutral); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
-    th, td { border-bottom: 1px solid rgba(255,255,255,0.10); padding: 8px; text-align: left; }
-    th { color: var(--muted); font-weight: 600; }
-    .mono { font-family: var(--mono); }
+    .pill.ok{
+      color: var(--good);
+      border-color: rgba(0,255,168,0.45);
+      box-shadow: 0 0 10px rgba(0,255,168,0.12);
+    }
+    .pill.cv{
+      color: var(--warn);
+      border-color: rgba(234,255,0,0.55);
+      box-shadow: 0 0 10px rgba(234,255,0,0.10);
+    }
+
+    .footer{
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 12px;
+    }
+    .error{
+      margin-top: 12px;
+      color: var(--bad);
+      border: 1px solid rgba(255,0,60,0.45);
+      background: rgba(255,0,60,0.08);
+      padding: 12px;
+      border-radius: 14px;
+      box-shadow: 0 0 18px rgba(255,0,60,0.12);
+    }
   </style>
 </head>
 
@@ -64,27 +189,154 @@
     <h1>BullshitBench Stability Audit</h1>
     <div class="subtitle">
       Derived stability + calibration metrics on BullshitBench-style prompts. No dashboard screenshots, no raw per-sample logs.
+      This page renders a public summary table from <span class="mono">results/summary (1).csv</span>.
     </div>
 
     <div class="card">
-      <span class="badge">N=8</span>
-      <span class="badge">T=0.2</span>
-      <span class="badge">Det token overlap</span>
-      <span class="badge">NLI semantic baseline</span>
+      <div class="badges">
+        <span class="badge">N=8</span>
+        <span class="badge yellow">T=0.2</span>
+        <span class="badge cyan">Det token overlap (Jaccard)</span>
+        <span class="badge cyan">NLI semantic baseline</span>
+      </div>
     </div>
 
     <div class="card">
-      <h2 style="margin:0 0 8px;">Results</h2>
-      <div class="subtitle">
-        Open the derived metrics here:
-        <a href="./results/summary.md">results/summary.md</a>
-        (or <a href="./results/summary.csv">summary.csv</a>)
+      <h2 style="margin:0 0 10px;">Results</h2>
+
+      <div class="controls">
+        <label>prompt_id
+          <select id="promptFilter">
+            <option value="">All</option>
+          </select>
+        </label>
+
+        <label>mode
+          <select id="modeFilter">
+            <option value="">All</option>
+            <option value="det_token_overlap">det_token_overlap</option>
+            <option value="nli_semantic">nli_semantic</option>
+          </select>
+        </label>
+
+        <label>model
+          <input id="modelSearch" placeholder="search…" />
+        </label>
+
+        <label style="margin-left:auto;">
+          <a href="./results/summary%20(1).csv">download csv</a>
+        </label>
       </div>
 
-      <p class="subtitle" style="margin-top:10px;">
-        This page is a simple landing page for sharing. The tables live in the results folder.
-      </p>
+      <div id="err" class="error" style="display:none;"></div>
+
+      <div class="tableWrap">
+        <table id="tbl">
+          <thead>
+            <tr>
+              <th>prompt_id</th>
+              <th>mode</th>
+              <th>model</th>
+              <th class="num">stability</th>
+              <th class="num">agreement</th>
+              <th class="num">entropy</th>
+              <th class="num">conf</th>
+              <th>cv</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <div class="footer">
+        Tip: Use the filters to isolate a prompt and compare det vs NLI. “CV” indicates confident variance flag.
+      </div>
     </div>
   </div>
+
+  <script>
+    async function loadCSV(url){
+      const res = await fetch(url, {cache:"no-store"});
+      if(!res.ok){
+        throw new Error("Could not load CSV (" + res.status + "). Check file name/path in /results/.");
+      }
+      const text = await res.text();
+      const lines = text.trim().split(/\r?\n/);
+      const headers = lines[0].split(",");
+      return lines.slice(1).map(line => {
+        const cols = line.split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/).map(s => s.replace(/^"|"$/g,""));
+        const obj = {};
+        headers.forEach((h,i)=>obj[h]=cols[i]);
+        return obj;
+      });
+    }
+
+    function uniq(arr){ return [...new Set(arr)].filter(Boolean); }
+
+    function pillCV(v){
+      const isTrue = String(v).toLowerCase() === "true";
+      return isTrue
+        ? `<span class="pill cv">CV</span>`
+        : `<span class="pill ok">OK</span>`;
+    }
+
+    function render(rows){
+      const tbody = document.querySelector("#tbl tbody");
+      tbody.innerHTML = rows.map(r => `
+        <tr>
+          <td class="mono">${r.prompt_id || ""}</td>
+          <td class="mono">${r.mode || ""}</td>
+          <td class="mono">${r.model || ""}</td>
+          <td class="num">${r.stability_index || ""}</td>
+          <td class="num">${r.agreement_rate || ""}</td>
+          <td class="num">${r.normalized_entropy || ""}</td>
+          <td class="num">${r.conf_mean || ""}</td>
+          <td>${pillCV(r.confident_variance_flag)}</td>
+        </tr>
+      `).join("");
+    }
+
+    (async () => {
+      const CSV_URL = "./results/summary%20(1).csv";
+
+      try{
+        const data = await loadCSV(CSV_URL);
+
+        const promptFilter = document.getElementById("promptFilter");
+        uniq(data.map(d=>d.prompt_id)).forEach(p=>{
+          const opt = document.createElement("option");
+          opt.value = p; opt.textContent = p;
+          promptFilter.appendChild(opt);
+        });
+
+        const modeFilter = document.getElementById("modeFilter");
+        const modelSearch = document.getElementById("modelSearch");
+
+        function apply(){
+          const p = promptFilter.value;
+          const m = modeFilter.value;
+          const q = modelSearch.value.toLowerCase().trim();
+          const filtered = data.filter(r => {
+            if (p && r.prompt_id !== p) return false;
+            if (m && r.mode !== m) return false;
+            if (q && !(r.model || "").toLowerCase().includes(q)) return false;
+            return true;
+          });
+          render(filtered);
+        }
+
+        promptFilter.addEventListener("change", apply);
+        modeFilter.addEventListener("change", apply);
+        modelSearch.addEventListener("input", apply);
+
+        apply();
+      }catch(e){
+        const err = document.getElementById("err");
+        err.style.display = "block";
+        err.textContent = e.message;
+        console.error(e);
+      }
+    })();
+  </script>
 </body>
 </html>
